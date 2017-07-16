@@ -4,46 +4,20 @@
  * @flow
  */
 
-import React, { PureComponent } from 'react';
-import CameraView from './containers/CameraView/CameraView';
+import React, { Component } from 'react';
+import HomeView from './containers/Home/HomeView';
 import {
   AppRegistry,
   StyleSheet,
-  Text,
   View
 } from 'react-native';
-import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 
-const FirstRoute = () => <View style={[ styles.container, { backgroundColor: '#ff4081' } ]} />;
-const SecondRoute = () => <CameraView />
-
-export default class NutritionDoctor extends PureComponent {
-  state = {
-    index: 0,
-    routes: [
-      { key: '1', title: 'First' },
-      { key: '2', title: 'Camera' },
-    ],
-  };
-
-  _handleChangeTab = index => this.setState({ index });
-
-  _renderHeader = props => <TabBar {...props} />;
-
-  _renderScene = SceneMap({
-    '1': FirstRoute,
-    '2': SecondRoute,
-  });
-
+export default class NutritionDoctor extends Component {
   render() {
     return (
-      <TabViewAnimated
-        style={styles.container}
-        navigationState={this.state}
-        renderScene={this._renderScene}
-        renderHeader={this._renderHeader}
-        onRequestChangeTab={this._handleChangeTab}
-      />
+      <View style={styles.container}>
+        <HomeView />
+      </View>
     );
   }
 }
