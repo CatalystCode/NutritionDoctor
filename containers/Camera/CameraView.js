@@ -8,46 +8,6 @@ import {
 } from 'react-native';
 import Camera from 'react-native-camera';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  preview: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  overlay: {
-    position: 'absolute',
-    padding: 16,
-    right: 0,
-    left: 0,
-    alignItems: 'center',
-  },
-  topOverlay: {
-    top: 0,
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  bottomOverlay: {
-    bottom: 0,
-    backgroundColor: 'rgba(0,0,0,0.4)',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  captureButton: {
-    padding: 15,
-    backgroundColor: 'white',
-    borderRadius: 40,
-  },
-  flashButton: {
-    padding: 5,
-  },
-});
-
 export default class CameraView extends React.Component {
   constructor(props) {
     super(props);
@@ -68,7 +28,11 @@ export default class CameraView extends React.Component {
   takePicture = () => {
     if (this.camera) {
       this.camera.capture()
-        .then((data) => console.log(data))
+        .then((data) => {
+          if (this.props.onPictureCapture) {
+            this.props.onPictureCapture(data.path);
+          }
+        })
         .catch(err => console.error(err));
     }
   }
@@ -97,12 +61,16 @@ export default class CameraView extends React.Component {
     let icon;
     const { auto, on, off } = Camera.constants.FlashMode;
 
-    if (this.state.camera.flashMode === auto) {
-      icon = require('./assets/ic_flash_auto_white.png');
-    } else if (this.state.camera.flashMode === on) {
-      icon = require('./assets/ic_flash_on_white.png');
-    } else if (this.state.camera.flashMode === off) {
-      icon = require('./assets/ic_flash_off_white.png');
+    switch (this.state.camera.flashMode) {
+      case auto:
+        icon = require('./assets/ic_flash_auto_white.png');
+        break;
+      case on:
+        icon = require('./assets/ic_flash_on_white.png');
+        break;
+      case off:
+        icon = require('./assets/ic_flash_off_white.png');
+        break;
     }
 
     return icon;
@@ -113,9 +81,7 @@ export default class CameraView extends React.Component {
       <View style={styles.container}>
         <StatusBar animated hidden />
         <Camera
-          ref={(cam) => {
-            this.camera = cam;
-          }}
+          ref={(cam) => { this.camera = cam; }}
           style={styles.preview}
           aspect={this.state.camera.aspect}
           captureTarget={this.state.camera.captureTarget}
@@ -141,3 +107,42 @@ export default class CameraView extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  preview: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  overlay: {
+    position: 'absolute',
+    padding: 16,
+    right: 0,
+    left: 0,
+    alignItems: 'center',
+  },
+  topOverlay: {
+    top: 0,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+  bottomOverlay: {
+    bottom: 0,
+    backgroundColor: 'rgba(0,0,0,0.4)',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  captureButton: {
+    padding: 15,
+    backgroundColor: 'white',
+    borderRadius: 40,
+  },
+  flashButton: {
+    padding: 10,
+  },
+});

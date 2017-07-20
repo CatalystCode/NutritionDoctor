@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import HomeView from './containers/Home/HomeView';
+import HomeView from './containers/HomeView';
 import {
   AppRegistry,
   StyleSheet,
@@ -15,17 +15,9 @@ import {
 export default class NutritionDoctor extends Component {
   render() {
     return (
-      <View style={styles.container}>
         <HomeView />
-      </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  }
-});
 
 AppRegistry.registerComponent('NutritionDoctor', () => NutritionDoctor);

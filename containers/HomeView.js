@@ -1,32 +1,38 @@
 import React, { PureComponent } from 'react';
-import CameraView from './../Camera/CameraView';
+import CameraView from './Camera/CameraView';
+import FoodListView from './FoodListView';
 import {
+  StatusBar,
   StyleSheet,
   Text,
   View
 } from 'react-native';
 import { TabViewAnimated, TabBar, SceneMap } from 'react-native-tab-view';
 
-const FirstRoute = () => <View style={[ styles.container, { backgroundColor: '#ff4081' } ]} />;
-const SecondRoute = () => <CameraView />
 
 export default class HomeView extends PureComponent {
   state = {
     index: 0,
     routes: [
-      { key: '1', title: 'First' },
+      { key: '1', title: 'Profile' },
       { key: '2', title: 'Camera' },
     ],
   };
 
   _handleChangeTab = index => this.setState({ index });
 
-  _renderHeader = props => <TabBar {...props} />;
+  _renderHeader = props => <StatusBar {...props} barStyle = "dark-content" hidden = {false}/>
+  _renderFooter = props => <TabBar {...props} pressOpacity={0.5} />;
 
   _renderScene = SceneMap({
-    '1': FirstRoute,
-    '2': SecondRoute,
+    '1': () => <FoodListView />,
+    '2': () => <CameraView onPictureCapture={this.addPicture}/>,
   });
+
+  addPicture = (path) => {
+    console.log(path);
+    this.setState({ index: 0 });
+  }
 
   render() {
     return (
@@ -35,6 +41,7 @@ export default class HomeView extends PureComponent {
         navigationState={this.state}
         renderScene={this._renderScene}
         renderHeader={this._renderHeader}
+        renderFooter={this._renderFooter}
         onRequestChangeTab={this._handleChangeTab}
       />
     );
