@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 import Camera from 'react-native-camera';
 
+import HomeView from './HomeView';
+
 export default class CameraView extends React.Component {
   constructor(props) {
     super(props);
@@ -21,7 +23,7 @@ export default class CameraView extends React.Component {
         type: Camera.constants.Type.back,
         orientation: Camera.constants.Orientation.auto,
         flashMode: Camera.constants.FlashMode.auto,
-      },
+      }
     };
   }
 
@@ -31,9 +33,43 @@ export default class CameraView extends React.Component {
         .then((data) => {
           if (this.props.onPictureCapture) {
             this.props.onPictureCapture(data.path);
+            this.storePicture(data.path);
           }
         })
         .catch(err => console.error(err));
+    }
+  }
+
+  storePicture = (path) => {
+    console.log(path);
+    if (path) {
+      // Create the form data object
+      var data = new FormData();
+      data.append('picture', { uri: path, name: 'food.jpg', type: 'image/jpg' });
+
+      // Create the config object for the POST
+      const config = {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'multipart/form-data;'
+        },
+        body: data,
+      }
+
+      //update URL for java api
+      fetch("https://postman-echo.com/post", config)
+        .then((responseData) => {
+          console.log(responseData);
+          //send user to list view to wait for image
+          this.props.navigator.push({
+            title: 'Image Uploaded',
+            component: HomeView
+          });
+        })
+        .catch(err => {
+          console.log(err);
+        })
     }
   }
 
@@ -87,8 +123,8 @@ export default class CameraView extends React.Component {
           captureTarget={this.state.camera.captureTarget}
           type={this.state.camera.type}
           flashMode={this.state.camera.flashMode}
-          onFocusChanged={() => {}}
-          onZoomChanged={() => {}}
+          onFocusChanged={() => { }}
+          onZoomChanged={() => { }}
           defaultTouchToFocus
           mirrorImage={false} />
         <View style={[styles.overlay, styles.topOverlay]}>
@@ -146,3 +182,5 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
+
+//AppRegistry.registerComponent('NutritionDoctor', () => CameraView);
