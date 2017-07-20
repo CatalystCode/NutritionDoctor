@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
+  NativeModules
 } from 'react-native';
 import Camera from 'react-native-camera';
 
@@ -43,33 +44,30 @@ export default class CameraView extends React.Component {
   storePicture = (path) => {
     console.log(path);
     if (path) {
-      // Create the form data object
-      var data = new FormData();
-      data.append('picture', { uri: path, name: 'food.jpg', type: 'image/jpg' });
+      NativeModules.ReadImageData.readImage(path, (base64Image) => {
+        // Create the config object for the POST
+        const config = {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'aplication/json;'
+          },
+          body: JSON.stringify({imageData : base64Image}),
+        }
 
-      // Create the config object for the POST
-      const config = {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'multipart/form-data;'
-        },
-        body: data,
-      }
-
-      //update URL for java api
-      fetch("https://postman-echo.com/post", config)
-        .then((responseData) => {
-          console.log(responseData);
-          //send user to list view to wait for image
-          this.props.navigator.push({
-            title: 'Image Uploaded',
-            component: HomeView
+        //update URL for java api
+        fetch("https://postman-echo.com/post", config)
+          .then((responseData) => {
+            console.log(responseData);
+            this.props.navigator.push({
+              title: 'Image Uploaded',
+              component: HomeView
+            });
+          })
+          .catch(err => {
+            console.log(err);
           });
-        })
-        .catch(err => {
-          console.log(err);
-        })
+      });
     }
   }
 
