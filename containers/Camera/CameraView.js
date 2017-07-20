@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Camera from 'react-native-camera';
 
-import HomeView from './HomeView';
+import HomeView from '../HomeView';
 
 export default class CameraView extends React.Component {
   constructor(props) {
