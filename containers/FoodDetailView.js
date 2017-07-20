@@ -30,7 +30,7 @@ export default class FoodDetailView extends PureComponent {
         paddingBottom: 20,
         padding: 10
       }}>
-        <Text><Text style={styles.bold}>{rowData.sha.substring(0, 6)}</Text> - {rowData.message}</Text>
+        <Text><Text style={styles.bold}>ABC</Text> - DEF</Text>
       </View>
     );
   }
@@ -45,7 +45,7 @@ export default class FoodDetailView extends PureComponent {
         alignItems: 'center'
       }}>
         <Image
-          source={{ uri: this.state.pushEvent.IMAGE }}
+          source={{ uri: this.state.pushEvent.image }}
           style={{
             height: 120,
             width: 120,
@@ -58,22 +58,14 @@ export default class FoodDetailView extends PureComponent {
           paddingBottom: 20,
           fontSize: 20
         }}>
-          {this.state.pushEvent.NAME}
-        </Text>
-
-        <Text style={{
-          paddingTop: 20,
-          paddingBottom: 20,
-          fontSize: 16
-        }}>
-          Calories: {this.state.pushEvent.CALORIES}
+          {this.state.pushEvent.name}
         </Text>
 
         <ListView
           contentInset={{
             top: -50
           }}
-          dataSource={this.state.dataSource}
+          dataSource={this.state.dataSource.nutrition}
           renderRow={this.renderRow.bind(this)} />
       </View>
     );

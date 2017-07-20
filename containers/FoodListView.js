@@ -72,7 +72,7 @@ export default class FoodListView extends PureComponent {
           backgroundColor: '#fff'
         }}>
           <Image
-            source={{ uri: rowData.IMAGE }}
+            source={{ uri: rowData.image }}
             style={{
               height: 36,
               width: 36,
@@ -84,12 +84,7 @@ export default class FoodListView extends PureComponent {
             paddingLeft: 20
           }}>
             <Text>
-              {rowData.NAME}
-            </Text>
-            <Text>
-              at <Text style={{
-                fontWeight: '600'
-              }}>{rowData.CALORIES}</Text>
+              {rowData.name}
             </Text>
           </View>
         </View>
