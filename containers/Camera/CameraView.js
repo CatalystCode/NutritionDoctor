@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
+  AppRegistry,
   Image,
   StatusBar,
   StyleSheet,
   TouchableOpacity,
   View,
-  NativeModules
+  NativeModules,
+  NavigatorIOS
 } from 'react-native';
 import Camera from 'react-native-camera';
 
-import HomeView from '../HomeView';
+export default class CameraView extends Component {
+  static navigationOptions = {
+    header: [
+      visible = false,
+    ]
+  }
 
-export default class CameraView extends React.Component {
   constructor(props) {
     super(props);
 
@@ -42,32 +48,35 @@ export default class CameraView extends React.Component {
   }
 
   storePicture = (path) => {
-    console.log(path);
     if (path) {
-      NativeModules.ReadImageData.readImage(path, (base64Image) => {
-        // Create the config object for the POST
-        const config = {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'aplication/json;'
-          },
-          body: JSON.stringify({imageData : base64Image}),
-        }
+      console.log(path);
+      goBack(null);
 
-        //update URL for java api
-        fetch("https://postman-echo.com/post", config)
-          .then((responseData) => {
-            console.log(responseData);
-            this.props.navigator.push({
-              title: 'Image Uploaded',
-              component: HomeView
-            });
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      });
+
+      // NativeModules.ReadImageData.readImage(path, (base64Image) => {
+      //   // Create the config object for the POST
+      //   const config = {
+      //     method: 'POST',
+      //     headers: {
+      //       'Accept': 'application/json',
+      //       'Content-Type': 'aplication/json;'
+      //     },
+      //     body: JSON.stringify({imageData : base64Image}),
+      //   }
+
+      //   //update URL for java api
+      //   fetch("https://postman-echo.com/post", config)
+      //     .then((responseData) => {
+      //       console.log(responseData);
+      //       this.props.navigator.push({
+      //         title: 'Image Uploaded',
+      //         component: HomeView
+      //       });
+      //     })
+      //     .catch(err => {
+      //       console.log(err);
+      //     });
+      // });
     }
   }
 
@@ -181,4 +190,4 @@ const styles = StyleSheet.create({
   },
 });
 
-//AppRegistry.registerComponent('NutritionDoctor', () => CameraView);
+AppRegistry.registerComponent('NutritionDoctor', () => CameraView);

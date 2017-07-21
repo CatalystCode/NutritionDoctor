@@ -1,23 +1,27 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
-import HomeView from './containers/HomeView';
 import {
   AppRegistry,
-  StyleSheet,
-  View
+  StyleSheet
 } from 'react-native';
+import { StackNavigator, TabNavigator } from 'react-navigation';
 
-export default class NutritionDoctor extends Component {
-  render() {
-    return (
-        <HomeView />
-    );
-  }
-}
+import FoodListView from './containers/FoodListView';
+import FoodDetailView from './containers/FoodDetailView';
+import CameraView from './containers/Camera/CameraView';
 
-AppRegistry.registerComponent('NutritionDoctor', () => NutritionDoctor);
+const HomeTabNavigator = TabNavigator({
+  Food: { screen: FoodListView },
+  Camera: { screen: CameraView }
+});
+
+const App = StackNavigator(
+{
+  Home: { screen: HomeTabNavigator },
+  FoodList: { screen: FoodListView },
+  Nutrition: { screen: FoodDetailView }
+},
+{ 
+  headerMode: 'screen' 
+});
+
+AppRegistry.registerComponent('NutritionDoctor', () => App);

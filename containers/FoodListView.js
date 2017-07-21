@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import {
-  StatusBar,
+  AppRegistry,
   StyleSheet,
   Text,
   View,
@@ -9,10 +9,17 @@ import {
   Image,
   TouchableHighlight
 } from 'react-native';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 import FoodDetailView from './FoodDetailView.js';
 
-export default class FoodListView extends PureComponent {
+export default class FoodListView extends Component {
+  static navigationOptions = {
+    header: [
+      visible = false,
+    ],
+    tabBarIcon: <Icon name="rocket" /> 
+  }
+
   constructor(props) {
     super(props);
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -27,39 +34,29 @@ export default class FoodListView extends PureComponent {
   }
 
   fetchFoodList() {
-    var url = '';
+    var url = 'https://jsonplaceholder.typicode.com/posts';
 
-    fetch(url, {
-      headers: ''
-    })
+    fetch(url
+      // {
+      //   headers: ''
+      // }
+    )
       .then((response) => response.json())
       .then((responseData) => {
-        var feedItems =
-          responseData.filter((ev) =>
-            ev.type == 'PushEvent');
         this.setState({
           dataSource: this.state.dataSource
-            .cloneWithRows(feedItems),
+            .cloneWithRows(responseData),
           showProgress: false
         });
       })
   }
 
-  pressRow(rowData) {
-    this.props.navigator.push({
-      title: 'Push Event',
-      component: FoodDetailView,
-      passProps: {
-        pushEvent: rowData
-      }
-    });
-  }
-
   //this will depend on the schema of the data we get back from the API
   renderRow(rowData) {
+    //const { navigate } = this.props.navigation;
     return (
       <TouchableHighlight
-        onPress={() => this.pressRow(rowData)}
+        onPress={() => this.props.navigation.navigate('Nutrition', { data: rowData })}
         underlayColor='#ddd'
       >
         <View style={{
@@ -84,7 +81,7 @@ export default class FoodListView extends PureComponent {
             paddingLeft: 20
           }}>
             <Text>
-              {rowData.name}
+              {rowData.title}
             </Text>
           </View>
         </View>
@@ -119,4 +116,4 @@ export default class FoodListView extends PureComponent {
   }
 }
 
-//AppRegistry.registerComponent('NutritionDoctor', () => FoodListView);
+AppRegistry.registerComponent('NutritionDoctor', () => FoodListView); 

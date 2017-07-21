@@ -1,20 +1,22 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import {
+  AppRegistry,
   StatusBar,
   StyleSheet,
   Text,
   View,
-  ListView,
   Image
 } from 'react-native';
 
-export default class FoodDetailView extends PureComponent {
+export default class FoodDetailView extends Component {
+  static navigationOptions = {
+    title: 'Nutrition'
+  };
+
   constructor(props) {
     super(props);
-    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = {
-      dataSource: ds.cloneWithRows(props.pushEvent.payload.commits),
-      pushEvent: props.pushEvent
+      data: props.navigation.state.params.data
     };
   }
 
@@ -45,7 +47,7 @@ export default class FoodDetailView extends PureComponent {
         alignItems: 'center'
       }}>
         <Image
-          source={{ uri: this.state.pushEvent.image }}
+          source={{ uri: this.state.data.image }}
           style={{
             height: 120,
             width: 120,
@@ -58,15 +60,8 @@ export default class FoodDetailView extends PureComponent {
           paddingBottom: 20,
           fontSize: 20
         }}>
-          {this.state.pushEvent.name}
+          {this.state.data.title}
         </Text>
-
-        <ListView
-          contentInset={{
-            top: -50
-          }}
-          dataSource={this.state.dataSource.nutrition}
-          renderRow={this.renderRow.bind(this)} />
       </View>
     );
   }
@@ -79,4 +74,4 @@ var styles = StyleSheet.create({
   }
 });
 
-//AppRegistry.registerComponent('NutritionDoctor', () => FoodDetailView);
+AppRegistry.registerComponent('NutritionDoctor', () => FoodDetailView);
