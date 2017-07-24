@@ -9,15 +9,13 @@ import {
   Image,
   TouchableHighlight
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import FoodDetailView from './FoodDetailView.js';
 
 export default class FoodListView extends Component {
   static navigationOptions = {
     header: [
-      visible = false,
-    ],
-    tabBarIcon: <Icon name="rocket" /> 
+      visible = false
+    ]
   }
 
   constructor(props) {
