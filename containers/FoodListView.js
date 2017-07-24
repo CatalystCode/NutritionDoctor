@@ -9,7 +9,9 @@ import {
   Image,
   TouchableHighlight
 } from 'react-native';
+import PTRView from 'react-native-pull-to-refresh';
 import FoodDetailView from './FoodDetailView.js';
+
 
 export default class FoodListView extends Component {
   static navigationOptions = {
@@ -25,6 +27,16 @@ export default class FoodListView extends Component {
       dataSource: ds,
       showProgress: true
     };
+    this._refresh = this._refresh.bind(this)
+  }
+
+  _refresh() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        this.fetchFoodList();
+        resolve();
+      }, 2000)
+    });
   }
 
   componentDidMount() {
@@ -32,6 +44,7 @@ export default class FoodListView extends Component {
   }
 
   fetchFoodList() {
+    console.log('RUNNING API CALL');
     var url = 'https://jsonplaceholder.typicode.com/posts';
 
     fetch(url
@@ -51,7 +64,6 @@ export default class FoodListView extends Component {
 
   //this will depend on the schema of the data we get back from the API
   renderRow(rowData) {
-    //const { navigate } = this.props.navigation;
     return (
       <TouchableHighlight
         onPress={() => this.props.navigation.navigate('Nutrition', { data: rowData })}
@@ -102,14 +114,16 @@ export default class FoodListView extends Component {
     }
 
     return (
-      <View style={{
-        flex: 1,
-        justifyContent: 'flex-start'
-      }}>
-        <ListView
-          dataSource={this.state.dataSource}
-          renderRow={this.renderRow.bind(this)} />
-      </View>
+      <PTRView onRefresh={this._refresh} >
+        <View style={{
+          flex: 1,
+          justifyContent: 'flex-start'
+        }}>
+          <ListView
+            dataSource={this.state.dataSource}
+            renderRow={this.renderRow.bind(this)} />
+        </View>
+      </PTRView>
     );
   }
 }

@@ -38,10 +38,11 @@ export default class CameraView extends Component {
     if (this.camera) {
       this.camera.capture()
         .then((data) => {
-          if (this.props.onPictureCapture) {
-            this.props.onPictureCapture(data.path);
+          //Commented out 'onPictureCapture' because it wasn't working. @Jason, what is it?
+         // if (this.props.onPictureCapture) {
+            //this.props.onPictureCapture(data.path);
             this.storePicture(data.path);
-          }
+         // }
         })
         .catch(err => console.error(err));
     }
@@ -50,9 +51,9 @@ export default class CameraView extends Component {
   storePicture = (path) => {
     if (path) {
       console.log(path);
-      goBack(null);
+      this.props.navigation.navigate('FoodList');
 
-
+      //Uncomment this when we have the API
       // NativeModules.ReadImageData.readImage(path, (base64Image) => {
       //   // Create the config object for the POST
       //   const config = {
