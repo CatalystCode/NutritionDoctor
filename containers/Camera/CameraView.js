@@ -62,7 +62,7 @@ export default class CameraView extends Component {
       //       'Accept': 'application/json',
       //       'Content-Type': 'aplication/json;'
       //     },
-      //     body: JSON.stringify({imageData : base64Image}),
+      //     body: JSON.stringify({userId: 1, imageData: base64Image}),
       //   }
 
       //   //update URL for java api

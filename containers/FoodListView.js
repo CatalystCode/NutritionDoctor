@@ -7,27 +7,37 @@ import {
   ListView,
   ActivityIndicator,
   Image,
-  TouchableHighlight
+  TouchableHighlight,
+  Button
 } from 'react-native';
 import PTRView from 'react-native-pull-to-refresh';
+
+import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
+import DayPickerInput from 'react-day-picker/DayPickerInput';
+import Overlay  from 'react-native-overlay';
+
 import FoodDetailView from './FoodDetailView.js';
 
+const value = null;
+const datePickerProps = null;
 
 export default class FoodListView extends Component {
-  static navigationOptions = {
-    header: [
-      visible = false
-    ]
-  }
+
 
   constructor(props) {
     super(props);
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = {
       dataSource: ds,
-      showProgress: true
+      showProgress: true,
+      selectedDay: null
     };
+
     this._refresh = this._refresh.bind(this)
+  }
+
+  componentDidMount() {
+    this.fetchFoodList();
   }
 
   _refresh() {
@@ -39,8 +49,33 @@ export default class FoodListView extends Component {
     });
   }
 
-  componentDidMount() {
-    this.fetchFoodList();
+  handleDayChange = selectedDay => {
+    this.setState({ selectedDay });
+  };
+
+  _selectDate() {
+    console.log("I AM HERE");
+    const value = this.state.selectedDay
+      ? this.state.selectedDay.format('DD/MM/YYYY')
+      : '';
+
+    return (
+      // <form>
+      //   <p>
+      //     <label for="input">Please enter a day:</label>
+      //   </p>
+      //   <DayPickerInput
+      //     name="birthday"
+      //     placeholder="DD/MM/YYYY"
+      //     format="DD/MM/YYYY"
+      //     value={value}
+      //     onDayChange={this.handleDayChange}
+      //   />
+      // </form>
+ <Overlay isVisible={true}>
+ <DayPicker onDayClick={ this.handleDayClick } />
+      </Overlay>
+    )
   }
 
   fetchFoodList() {
@@ -62,12 +97,37 @@ export default class FoodListView extends Component {
       })
   }
 
+
+  static navigationOptions = {
+    header: [
+      title =
+      <TouchableHighlight
+        key="foodlistDate"
+        onPress={this._selectDate}
+      >
+        <Text
+          style={{
+            textAlign: 'center',
+            fontSize: 20,
+            marginBottom: 10,
+            marginTop: 10
+          }} >
+          {new Date().toDateString()}
+        </Text>
+      </TouchableHighlight>
+      ,
+
+
+    ]
+  }
+
   //this will depend on the schema of the data we get back from the API
   renderRow(rowData) {
     return (
       <TouchableHighlight
         onPress={() => this.props.navigation.navigate('Nutrition', { data: rowData })}
         underlayColor='#ddd'
+        key={rowData.id}
       >
         <View style={{
           flex: 1,

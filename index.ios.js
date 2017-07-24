@@ -12,29 +12,29 @@ import CameraView from './containers/Camera/CameraView';
 
 const HomeTabNavigator = TabNavigator(
   {
-  FoodList: {
-    screen: FoodListView,
-    navigationOptions: {
-      tabBarLabel: 'Food',
-      tabBarIcon: ({ tintColor }) => <Icon name="list" size={35} color={tintColor} />
+    Camera: {
+      screen: CameraView,
+      navigationOptions: {
+        tabBarLabel: 'Camera',
+        tabBarIcon: ({ tintColor }) => <Icon name="photo-camera" size={35} color={tintColor} />
+      }
+    },
+    FoodList: {
+      screen: FoodListView,
+      navigationOptions: {
+        tabBarLabel: 'Food',
+        tabBarIcon: ({ tintColor }) => <Icon name="list" size={35} color={tintColor} />
+      }
     }
   },
-  Camera: {
-    screen: CameraView,
-    navigationOptions: {
-      tabBarLabel: 'Camera',
-      tabBarIcon: ({ tintColor }) => <Icon name="photo-camera" size={35} color={tintColor} />
+  {
+    tabBarOptions: {
+      inactiveBackgroundColor: '#19AFE2',
+      activeBackgroundColor: '#33CCFF',
+      activeTintColor: '#FFF',
+      inactiveTintColor: '#FFF',
     }
-  }
-},
-{
-  tabBarOptions: {
-    inactiveBackgroundColor: '#19AFE2',
-    activeBackgroundColor: '#33CCFF',
-    activeTintColor: '#FFF',
-    inactiveTintColor: '#FFF',
-  }
-});
+  });
 
 const App = StackNavigator(
   {
