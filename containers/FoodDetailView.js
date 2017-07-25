@@ -47,7 +47,7 @@ export default class FoodDetailView extends Component {
         alignItems: 'center'
       }}>
         <Image
-          source={{ uri: this.state.data.image }}
+          source={{ uri: this.state.data.imageUrl }}
           style={{
             height: 120,
             width: 120,
@@ -60,7 +60,15 @@ export default class FoodDetailView extends Component {
           paddingBottom: 20,
           fontSize: 20
         }}>
-          {this.state.data.title}
+          {this.state.data.foodName}
+        </Text>
+
+        <Text style={{
+          paddingTop: 20,
+          paddingBottom: 20,
+          fontSize: 20
+        }}>Calories: 
+          {this.state.data.nutrition.calories}
         </Text>
       </View>
     );

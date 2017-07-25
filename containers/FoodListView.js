@@ -10,7 +10,7 @@ import {
   TouchableHighlight
 } from 'react-native';
 import PTRView from 'react-native-pull-to-refresh';
-import Overlay  from 'react-native-overlay';
+import Overlay from 'react-native-overlay';
 
 import FoodDetailView from './FoodDetailView.js';
 
@@ -68,21 +68,25 @@ export default class FoodListView extends Component {
       //     onDayChange={this.handleDayChange}
       //   />
       // </form>
- <Overlay isVisible={true}>
- <DayPicker onDayClick={ this.handleDayClick } />
+      <Overlay isVisible={true}>
+        <DayPicker onDayClick={this.handleDayClick} />
       </Overlay>
     )
   }
 
   fetchFoodList() {
     console.log('RUNNING API CALL');
-    var url = 'https://jsonplaceholder.typicode.com/posts';
 
-    fetch(url
-      // {
-      //   headers: ''
-      // }
-    )
+    var url = 'http://nutritiondoctorapi.azurewebsites.net/api/user/identify/lilian';
+    const config = {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }
+
+    fetch(url, config)
       .then((response) => response.json())
       .then((responseData) => {
         this.setState({
@@ -90,6 +94,7 @@ export default class FoodListView extends Component {
             .cloneWithRows(responseData),
           showProgress: false
         });
+        console.log(responseData);
       })
   }
 
@@ -119,11 +124,12 @@ export default class FoodListView extends Component {
 
   //this will depend on the schema of the data we get back from the API
   renderRow(rowData) {
+    console.log("ROWDATA: " + rowData );
     return (
       <TouchableHighlight
         onPress={() => this.props.navigation.navigate('Nutrition', { data: rowData })}
         underlayColor='#ddd'
-        key={rowData.id}
+        key={rowData.userId}
       >
         <View style={{
           flex: 1,
@@ -135,7 +141,7 @@ export default class FoodListView extends Component {
           backgroundColor: '#fff'
         }}>
           <Image
-            source={{ uri: rowData.image }}
+            source={{ uri: rowData.imageUrl }}
             style={{
               height: 36,
               width: 36,
@@ -147,7 +153,7 @@ export default class FoodListView extends Component {
             paddingLeft: 20
           }}>
             <Text>
-              {rowData.title}
+              {rowData.foodName}
             </Text>
           </View>
         </View>

@@ -57,7 +57,7 @@ export default class CameraView extends Component {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json;'
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify({ userId: "lilian", imageData: imageBase64 }),
         }
