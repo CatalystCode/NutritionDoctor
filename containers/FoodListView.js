@@ -7,12 +7,9 @@ import {
   ListView,
   ActivityIndicator,
   Image,
-  TouchableHighlight,
-  Button
+  TouchableHighlight
 } from 'react-native';
 import PTRView from 'react-native-pull-to-refresh';
-
-import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import Overlay  from 'react-native-overlay';
 

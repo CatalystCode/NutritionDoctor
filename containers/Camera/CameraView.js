@@ -6,8 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
-  NativeModules,
-  NavigatorIOS
+  NativeModules
 } from 'react-native';
 import Camera from 'react-native-camera';
 
@@ -51,33 +50,27 @@ export default class CameraView extends Component {
   storePicture = (path) => {
     if (path) {
       console.log(path);
-      this.props.navigation.navigate('FoodList');
+      
+      NativeModules.ReadImageData.readImage(path, (base64Image) => {
+        // Create the config object for the POST
+        const config = {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'aplication/json;'
+          },
+          body: JSON.stringify({userId: "lilian0101", imageData: base64Image}),
+        }
 
-      //Uncomment this when we have the API
-      // NativeModules.ReadImageData.readImage(path, (base64Image) => {
-      //   // Create the config object for the POST
-      //   const config = {
-      //     method: 'POST',
-      //     headers: {
-      //       'Accept': 'application/json',
-      //       'Content-Type': 'aplication/json;'
-      //     },
-      //     body: JSON.stringify({userId: 1, imageData: base64Image}),
-      //   }
-
-      //   //update URL for java api
-      //   fetch("https://postman-echo.com/post", config)
-      //     .then((responseData) => {
-      //       console.log(responseData);
-      //       this.props.navigator.push({
-      //         title: 'Image Uploaded',
-      //         component: HomeView
-      //       });
-      //     })
-      //     .catch(err => {
-      //       console.log(err);
-      //     });
-      // });
+        fetch("http://nutritiondoctorapi.azurewebsites.net/api/user/identify", config)
+          .then((responseData) => {
+            console.log(responseData);
+            this.props.navigation.navigate('FoodList');
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      });
     }
   }
 
