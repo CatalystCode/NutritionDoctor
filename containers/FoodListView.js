@@ -7,7 +7,8 @@ import {
   ListView,
   ActivityIndicator,
   Image,
-  TouchableHighlight
+  TouchableHighlight,
+  Button
 } from 'react-native';
 import PTRView from 'react-native-pull-to-refresh';
 import Overlay from 'react-native-overlay';
@@ -103,11 +104,15 @@ export default class FoodListView extends Component {
     header: [
       title =
       <TouchableHighlight
+       style={{
+            backgroundColor: "#F08C37",
+          }}
         key="foodlistDate"
         onPress={this._selectDate}
       >
         <Text
           style={{
+            color: "#FFF",
             textAlign: 'center',
             fontSize: 20,
             marginBottom: 10,
@@ -116,13 +121,9 @@ export default class FoodListView extends Component {
           {new Date().toDateString()}
         </Text>
       </TouchableHighlight>
-      ,
-
-
     ]
   }
 
-  //this will depend on the schema of the data we get back from the API
   renderRow(rowData) {
     console.log("ROWDATA: " + rowData );
     return (

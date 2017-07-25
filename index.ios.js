@@ -29,8 +29,8 @@ const HomeTabNavigator = TabNavigator(
   },  
   {
     tabBarOptions: {
-      inactiveBackgroundColor: '#19AFE2',
-      activeBackgroundColor: '#33CCFF',
+      inactiveBackgroundColor: '#F3D0A7',
+      activeBackgroundColor: '#F08C37',
       activeTintColor: '#FFF',
       inactiveTintColor: '#FFF',
     }
