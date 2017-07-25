@@ -10,7 +10,6 @@ import {
   TouchableHighlight
 } from 'react-native';
 import PTRView from 'react-native-pull-to-refresh';
-import DayPickerInput from 'react-day-picker/DayPickerInput';
 import Overlay  from 'react-native-overlay';
 
 import FoodDetailView from './FoodDetailView.js';

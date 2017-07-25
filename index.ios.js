@@ -26,7 +26,7 @@ const HomeTabNavigator = TabNavigator(
         tabBarIcon: ({ tintColor }) => <Icon name="list" size={35} color={tintColor} />
       }
     }
-  },
+  },  
   {
     tabBarOptions: {
       inactiveBackgroundColor: '#19AFE2',

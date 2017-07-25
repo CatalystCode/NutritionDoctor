@@ -38,28 +38,27 @@ export default class CameraView extends Component {
       this.camera.capture()
         .then((data) => {
           //Commented out 'onPictureCapture' because it wasn't working. @Jason, what is it?
-         // if (this.props.onPictureCapture) {
-            //this.props.onPictureCapture(data.path);
-            this.storePicture(data.path);
-         // }
+          // if (this.props.onPictureCapture) {
+          //this.props.onPictureCapture(data.path);
+          this.storePicture(data.path);
+          // }
         })
         .catch(err => console.error(err));
     }
   }
 
   storePicture = (path) => {
+    console.log(path);
     if (path) {
-      console.log(path);
-      
-      NativeModules.ReadImageData.readImage(path, (base64Image) => {
-        // Create the config object for the POST
+
+      NativeModules.ReadImageData.readImage(path, (imageBase64) => {
         const config = {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
-            'Content-Type': 'aplication/json;'
+            'Content-Type': 'application/json;'
           },
-          body: JSON.stringify({userId: "lilian0101", imageData: base64Image}),
+          body: JSON.stringify({ userId: "lilian", imageData: imageBase64 }),
         }
 
         fetch("http://nutritiondoctorapi.azurewebsites.net/api/user/identify", config)
