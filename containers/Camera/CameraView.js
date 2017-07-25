@@ -6,7 +6,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
-  NativeModules
+  NativeModules,
+  Alert
 } from 'react-native';
 import Camera from 'react-native-camera';
 
@@ -64,7 +65,27 @@ export default class CameraView extends Component {
         fetch("http://nutritiondoctorapi.azurewebsites.net/api/user/identify", config)
           .then((responseData) => {
             console.log(responseData);
-            this.props.navigation.navigate('FoodList');
+            if (responseData.status == 200) {
+              Alert.alert(
+                'Success!',
+                'Image successfully uploaded.',
+                [
+                  { text: 'OK', onPress: () => console.log('OK Pressed') },
+                ],
+                { cancelable: false }
+              )
+
+              this.props.navigation.navigate('FoodList');
+            }else{
+              Alert.alert(
+                'Woops!',
+                'Sorry, something went wrong.',
+                [
+                  { text: 'OK', onPress: () => console.log('OK Pressed') },
+                ],
+                { cancelable: false }
+              )
+            }
           })
           .catch(err => {
             console.log(err);
