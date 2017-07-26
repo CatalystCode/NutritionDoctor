@@ -114,7 +114,7 @@ export default class FoodListView extends Component {
             marginBottom: 10,
             marginTop: 10
           }} >
-          {new Date().toDateString()}
+          Today, {new Date().toDateString()}
         </Text>
       </TouchableHighlight>
     ]
@@ -137,8 +137,7 @@ export default class FoodListView extends Component {
           backgroundColor: '#fff'
         }}>
           <Image
-          //should be imageUrl
-            source={{ uri: rowData.userId }}
+            source={{ uri: rowData.imageUrl }}
             style={{
               height: 50,
               width: 50,
@@ -153,12 +152,11 @@ export default class FoodListView extends Component {
             fontWeight: '800',
             color: '#F08C37'
           }}>
-              {/* should be foodName */}
-              {rowData.imageUrl}
+              {rowData.foodName}
             </Text>
 
             <Text>
-              {rowData.nutrition.calories}
+              {rowData.nutrition.calories.factValue} {rowData.nutrition.calories.factUnit}
             </Text>
           </View>
         </View>

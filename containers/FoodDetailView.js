@@ -42,9 +42,25 @@ export default class FoodDetailView extends Component {
   render() {
     var tintColor =  "#F08C37";
     const tableData = [
-      [<Icon name="fire" type='material-community' height={65} width={65} color={tintColor}/>, <Icon name="scale-bathroom" type='material-community' height={65} width={65} color={tintColor}/>, <Icon name="hexagon-multiple" type='material-community' height={65} width={65} color={tintColor}/>, <Icon name="water" type='material-community' height={65} width={65} color={tintColor}/>],
+      [
+        <Icon name="fire" type='material-community' height={65} width={65} color={tintColor}/>, 
+        <Icon name="scale-bathroom" type='material-community' height={65} width={65} color={tintColor}/>, 
+        <Icon name="hexagon-multiple" type='material-community' height={65} width={65} color={tintColor}/>, 
+        <Icon name="water" type='material-community' height={65} width={65} color={tintColor}/>
+      ],
       ['Calories', 'Fat', 'Protein', 'Carbohydrate'],
-      [this.state.data.nutrition.calories, this.state.data.nutrition.fat, this.state.data.nutrition.protein, this.state.data.nutrition.carbohydrate]
+      [
+        this.state.data.nutrition.calories.factValue, 
+        this.state.data.nutrition.fat.factValue, 
+        this.state.data.nutrition.protein.factValue, 
+        this.state.data.nutrition.carbohydrate.factValue
+      ],
+      [
+        this.state.data.nutrition.calories.factUnit, 
+        this.state.data.nutrition.fat.factUnit, 
+        this.state.data.nutrition.protein.factUnit, 
+        this.state.data.nutrition.carbohydrate.factUnit
+      ]
     ];
     return (
       <View style={styles.view}>
@@ -57,11 +73,11 @@ export default class FoodDetailView extends Component {
           color: '#F08C37',
           textAlign: 'center',
         }}>
-          {this.state.data.imageUrl}
+          {this.state.data.foodName}
         </Text>
 
         <Image
-          source={{ uri: this.state.data.userId }}
+          source={{ uri: this.state.data.imageUrl }}
           style={{
             height: 220,
             width: 220,
