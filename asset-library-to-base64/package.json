@@ -1,0 +1,93 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "asset-library-to-base64",
+        "scope": null,
+        "escapedName": "asset-library-to-base64",
+        "name": "asset-library-to-base64",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/Users/lilian/GitHub/NutritionDoctor"
+    ]
+  ],
+  "_from": "asset-library-to-base64@latest",
+  "_id": "asset-library-to-base64@1.0.1",
+  "_inCache": true,
+  "_location": "/asset-library-to-base64",
+  "_nodeVersion": "6.3.1",
+  "_npmOperationalInternal": {
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/asset-library-to-base64-1.0.1.tgz_1473335759422_0.3407158141490072"
+  },
+  "_npmUser": {
+    "name": "dinesh-sharma",
+    "email": "dinesh829269@gmail.com"
+  },
+  "_npmVersion": "3.10.3",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "asset-library-to-base64",
+    "scope": null,
+    "escapedName": "asset-library-to-base64",
+    "name": "asset-library-to-base64",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/asset-library-to-base64/-/asset-library-to-base64-1.0.1.tgz",
+  "_shasum": "b30da1b0de37e2f7b769268e6f2ff09725bf805e",
+  "_shrinkwrap": null,
+  "_spec": "asset-library-to-base64",
+  "_where": "/Users/lilian/GitHub/NutritionDoctor",
+  "author": {
+    "name": "Dinesh Kumar Sharma"
+  },
+  "bugs": {
+    "url": "https://github.com/dinesh829269/react-native-ios-asset-library-to-base64.git"
+  },
+  "contributors": [],
+  "dependencies": {},
+  "description": "A React Native Module to convert image's  asset-library:// uri to base64.",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "b30da1b0de37e2f7b769268e6f2ff09725bf805e",
+    "tarball": "https://registry.npmjs.org/asset-library-to-base64/-/asset-library-to-base64-1.0.1.tgz"
+  },
+  "gitHead": "d7890f3bd9700e66bf3d520137059ecac76a3661",
+  "homepage": "https://github.com/dinesh829269/react-native-ios-asset-library-to-base64.git",
+  "keywords": [
+    "react-native",
+    "asset-library-to-base64",
+    "asset",
+    "library",
+    "base64",
+    "asset library to base 64"
+  ],
+  "license": "ISC",
+  "maintainers": [
+    {
+      "name": "dinesh-sharma",
+      "email": "dinesh829269@gmail.com"
+    }
+  ],
+  "name": "asset-library-to-base64",
+  "nativePackage": true,
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dinesh829269/react-native-ios-asset-library-to-base64.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.1"
+}

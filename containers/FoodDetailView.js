@@ -8,6 +8,7 @@ import {
   Image,
   TouchableHighlight
 } from 'react-native';
+import { Table, TableWraper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 
 export default class FoodDetailView extends Component {
 
@@ -39,36 +40,14 @@ export default class FoodDetailView extends Component {
     ]
   };
 
-renderRow(rowData) {
-    return (
-        <View style={{
-          flex: 1,
-          flexDirection: 'row',
-          padding: 20,
-          alignItems: 'center',
-          borderColor: '#D7D7D7',
-          borderBottomWidth: 1,
-          backgroundColor: '#fff'
-        }}>
-
-          <View style={{
-            paddingLeft: 20
-          }}>
-            <Text>
-              {rowData.nutrition}
-            </Text>
-          </View>
-        </View>
-    );
-  }
-
   render() {
-    let data = [{
-      "Fat": parseInt(this.state.data.nutrition.fat),
-      "Calories": parseInt(this.state.data.nutrition.calories),
-      "Carbohydrate": parseInt(this.state.data.nutrition.carbohydrate),
-      "Protein": parseInt(this.state.data.nutrition.protein),
-    }];
+    const tableHead = ['Icon', 'Name', 'Value'];
+    const tableData = [
+      ['', 'Calories', this.state.data.nutrition.calories],
+      ['', 'Fat', this.state.data.nutrition.fat],
+      ['', 'Protein', this.state.data.nutrition.protein],
+      ['', 'Carbohydrate', this.state.data.nutrition.carbohydrate],
+    ];
 
 
     return (
@@ -91,14 +70,15 @@ renderRow(rowData) {
         <Image
           source={{ uri: this.state.data.imageUrl }}
           style={{
-            height: 120,
-            width: 120,
+            height: 220,
+            width: 220,
             borderRadius: 60
           }}
         />
-        <ListView
-            dataSource={this.state.data}
-            renderRow={this.renderRow.bind(this)} />
+        <Table style={styles.table} borderStyle={{borderWidth: 0.5, borderColor: '#F08C37'}}>
+          <Row data={tableHead} style={styles.head} textStyle={styles.text} flexArr={[1, 2, 1, 2]}/>
+          <Cols data={tableData2} textStyle={styles.text} heightArr={[20, 50]} widthArr={[60, 120, 60, 120]}/>
+        </Table>
       </View>
     );
   }
@@ -110,12 +90,9 @@ var styles = StyleSheet.create({
     paddingBottom: 10,
     fontSize: 20
   },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f7f7f7',
-  }
+  table: { width: 360 },
+  head: { height: 40 },
+  text: { textAlign: 'center' },
 });
 
 AppRegistry.registerComponent('NutritionDoctor', () => FoodDetailView);

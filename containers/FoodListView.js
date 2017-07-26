@@ -11,7 +11,6 @@ import {
   Button
 } from 'react-native';
 import PTRView from 'react-native-pull-to-refresh';
-import Overlay from 'react-native-overlay';
 
 import FoodDetailView from './FoodDetailView.js';
 
@@ -56,23 +55,20 @@ export default class FoodListView extends Component {
       ? this.state.selectedDay.format('DD/MM/YYYY')
       : '';
 
-    return (
-      // <form>
-      //   <p>
-      //     <label for="input">Please enter a day:</label>
-      //   </p>
-      //   <DayPickerInput
-      //     name="birthday"
-      //     placeholder="DD/MM/YYYY"
-      //     format="DD/MM/YYYY"
-      //     value={value}
-      //     onDayChange={this.handleDayChange}
-      //   />
-      // </form>
-      <Overlay isVisible={true}>
-        <DayPicker onDayClick={this.handleDayClick} />
-      </Overlay>
-    )
+    // return (
+    //   // <form>
+    //   //   <p>
+    //   //     <label for="input">Please enter a day:</label>
+    //   //   </p>
+    //   //   <DayPickerInput
+    //   //     name="birthday"
+    //   //     placeholder="DD/MM/YYYY"
+    //   //     format="DD/MM/YYYY"
+    //   //     value={value}
+    //   //     onDayChange={this.handleDayChange}
+    //   //   />
+    //   // </form>
+    // )
   }
 
   fetchFoodList() {
