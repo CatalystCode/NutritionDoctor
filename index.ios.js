@@ -9,7 +9,9 @@ import { Icon } from 'react-native-elements';
 import FoodListView from './containers/FoodListView';
 import FoodDetailView from './containers/FoodDetailView';
 import CameraView from './containers/Camera/CameraView';
+import HomeView from './containers/HomeView';
 
+/*
 const HomeTabNavigator = TabNavigator(
   {
     Camera: {
@@ -44,5 +46,13 @@ const App = StackNavigator(
   {
     headerMode: 'screen'
   });
+*/
+export default class NutritionDoctor extends Component {
+  render() {
+    return (
+        <HomeView />
+    );
+  }
+}
 
-AppRegistry.registerComponent('NutritionDoctor', () => App);
+AppRegistry.registerComponent('NutritionDoctor', () => NutritionDoctor);

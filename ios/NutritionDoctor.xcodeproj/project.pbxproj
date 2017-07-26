@@ -43,6 +43,7 @@
 		6931BCDF72154963A6B2068A /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2A5D6DEF144148B39CE884A7 /* Octicons.ttf */; };
 		6CDA4A2B054044898F38EE22 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF706EABE4D24009AA1DF586 /* MaterialIcons.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		96729A801F294ED100C9101E /* AssetLibraryToBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 96729A7F1F294ED100C9101E /* AssetLibraryToBase64.m */; };
 		9BF4A97F4F0346C8988035EE /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EBCE89556DB1461F8E2D9366 /* libRNVectorIcons.a */; };
 		B73B06E458D24C7C88F8B5F4 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 745133D466FE4195A0F2D2C7 /* FontAwesome.ttf */; };
 		C654304A095F4E4BACEDA6EF /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 90D31FD7BB7B4852899FF863 /* EvilIcons.ttf */; };
@@ -318,6 +319,7 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		90D31FD7BB7B4852899FF863 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		96729A7F1F294ED100C9101E /* AssetLibraryToBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssetLibraryToBase64.m; path = "../node_modules/react-native-asset-library-to-base64/ios/AssetLibraryToBase64.m"; sourceTree = "<group>"; };
 		B65D641C83E04891B6ABBC1F /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		BF706EABE4D24009AA1DF586 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		D188172F82194B0E801ADB60 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
@@ -543,6 +545,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				96729A7F1F294ED100C9101E /* AssetLibraryToBase64.m */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -1079,6 +1082,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96729A801F294ED100C9101E /* AssetLibraryToBase64.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);

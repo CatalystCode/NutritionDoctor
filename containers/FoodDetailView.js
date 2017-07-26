@@ -44,7 +44,6 @@ export default class FoodDetailView extends Component {
     const tableData = [
       [
         <Icon name="fire" type='material-community' height={65} width={65} color={tintColor}/>, 
-        <Icon name="scale-bathroom" type='material-community' height={65} width={65} color={tintColor}/>, 
         <Icon name="hexagon-multiple" type='material-community' height={65} width={65} color={tintColor}/>, 
         <Icon name="water" type='material-community' height={65} width={65} color={tintColor}/>
       ],

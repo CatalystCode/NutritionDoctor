@@ -3129,6 +3129,10 @@ react-devtools-core@2.3.1:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
+react-native-asset-library-to-base64@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-asset-library-to-base64/-/react-native-asset-library-to-base64-1.0.1.tgz#100bf62f296cecd269d37c6c8d9dd356f68fdfec"
+
 react-native-camera@^0.9.4:
   version "0.9.4"
   resolved "https://registry.yarnpkg.com/react-native-camera/-/react-native-camera-0.9.4.tgz#054b58a6f002a7cfae3f11f3c220f4ae393e67c0"
