@@ -121,7 +121,6 @@ export default class FoodListView extends Component {
   }
 
   renderRow(rowData) {
-    console.log("ROWDATA: " + rowData );
     return (
       <TouchableHighlight
         onPress={() => this.props.navigation.navigate('Nutrition', { data: rowData })}
@@ -138,19 +137,28 @@ export default class FoodListView extends Component {
           backgroundColor: '#fff'
         }}>
           <Image
-            source={{ uri: rowData.imageUrl }}
+          //should be imageUrl
+            source={{ uri: rowData.userId }}
             style={{
-              height: 36,
-              width: 36,
-              borderRadius: 18
+              height: 50,
+              width: 50,
+              borderRadius: 25
             }}
           />
 
           <View style={{
             paddingLeft: 20
           }}>
+            <Text style={{
+            fontWeight: '800',
+            color: '#F08C37'
+          }}>
+              {/* should be foodName */}
+              {rowData.imageUrl}
+            </Text>
+
             <Text>
-              {rowData.foodName}
+              {rowData.nutrition.calories}
             </Text>
           </View>
         </View>
@@ -163,7 +171,8 @@ export default class FoodListView extends Component {
       return (
         <View style={{
           flex: 1,
-          justifyContent: 'center'
+          justifyContent: 'center',
+          backgroundColor: '#FFF',
         }}>
           <ActivityIndicator
             size="large"
@@ -173,10 +182,13 @@ export default class FoodListView extends Component {
     }
 
     return (
-      <PTRView onRefresh={this._refresh} >
+      <PTRView onRefresh={this._refresh} style={{
+          backgroundColor: '#FFF',
+        }}>
         <View style={{
           flex: 1,
-          justifyContent: 'flex-start'
+          justifyContent: 'flex-start',
+          backgroundColor: '#FFF',
         }}>
           <ListView
             dataSource={this.state.dataSource}

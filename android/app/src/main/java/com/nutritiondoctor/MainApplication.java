@@ -3,6 +3,7 @@ package com.nutritiondoctor;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.lwansbrough.RCTCamera.RCTCameraPackage;
 import com.github.xfumihiro.react_native_image_to_base64.ImageToBase64Package;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.rnfs.RNFSPackage;
@@ -26,6 +27,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RCTCameraPackage(),
             new ImageToBase64Package(),
             new VectorIconsPackage(),
             new RNFSPackage()
