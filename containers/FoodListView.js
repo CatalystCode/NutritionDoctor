@@ -11,8 +11,8 @@ import {
   Button
 } from 'react-native';
 import PTRView from 'react-native-pull-to-refresh';
-
 import FoodDetailView from './FoodDetailView.js';
+import Moment from 'moment';
 
 const value = null;
 const datePickerProps = null;
@@ -72,7 +72,7 @@ export default class FoodListView extends Component {
   fetchFoodList() {
     console.log('RUNNING API CALL');
 
-    var url = 'http://nutritiondoctorapi.azurewebsites.net/api/user/identify/jason';
+    var url = 'http://nutritiondoctor.azurewebsites.net/api/user/identify/jason';
     const config = {
       method: 'GET',
       headers: {
@@ -118,56 +118,56 @@ export default class FoodListView extends Component {
         </Text>
       </View>,
     ],
-    headerLeft: <Button color="#92A1A7" title="<" />
   }
 
   renderRow(rowData) {
-    return (
-      <TouchableHighlight
-        onPress={() => this.props.navigation.navigate('Nutrition', { data: rowData })}
-        underlayColor='#ddd'
-        key={rowData.userId}
-      >
-        <View style={{
-          flex: 1,
-          flexDirection: 'row',
-          padding: 20,
-          alignItems: 'center',
-          borderColor: '#D7D7D7',
-          borderBottomWidth: 0.5,
-          backgroundColor: '#fff'
-        }}>
-          <Image
-            source={{ uri: rowData.imageUrl }}
-            style={{
-              height: 70,
-              width: 100,
-            }}
-          />
-
+    const formattedDate = Moment(rowData.createdDateTime).format('LL')
+    if (rowData) {
+      return (
+        <TouchableHighlight
+          onPress={() => this.props.navigation.navigate('Nutrition', { data: rowData })}
+          underlayColor='#ddd'
+          key={rowData.userId} >
           <View style={{
-            paddingLeft: 20
+            flex: 1,
+            flexDirection: 'row',
+            padding: 20,
+            alignItems: 'center',
+            borderColor: '#D7D7D7',
+            borderBottomWidth: 0.5,
+            backgroundColor: '#fff'
           }}>
-            <Text style={{
-              fontSize: 18,
-              fontWeight: '400',
-              color: '#F08C37'
-            }}>
-              {rowData.foodName}
-            </Text>
+            <Image
+              source={{ uri: rowData.imageUrl }}
+              style={{
+                height: 70,
+                width: 100,
+              }}
+            />
 
-            <Text style={{ color: '#92A1A7', marginTop: 10 }}>
-              {rowData.nutrition.calories.factValue} {rowData.nutrition.calories.factUnit} / 100g
-            </Text>
+            <View style={{ paddingLeft: 20 }}>
+              <Text style={{
+                fontSize: 18,
+                fontWeight: '400',
+                color: '#F08C37'
+              }}>
+                {rowData.foodName}
+              </Text>
 
-            <Text style={{ color: '#92A1A7', marginTop: 10 }}>
-              {/* Update this with time of creation from db */}
-              {new Date().toDateString()}
-            </Text>
+              {rowData.nutrition.calories && 
+                <Text style={{ color: '#92A1A7', marginTop: 10 }}>
+                  {rowData.nutrition.calories.factValue} {rowData.nutrition.calories.factUnit} / 100g
+                </Text>
+              }
+
+              <Text style={{ color: '#92A1A7', marginTop: 10 }}>
+                { formattedDate }
+              </Text>
+            </View>
           </View>
-        </View>
-      </TouchableHighlight>
-    );
+        </TouchableHighlight>
+      );
+    }
   }
 
   render() {

@@ -20,8 +20,7 @@ export default class FoodDetailView extends Component {
           borderBottomColor: '#92A1A7',
           borderBottomWidth: 1,
         }}
-        key="foodDetail"
-      >
+        key="foodDetail" >
         <Text
           style={{
             color: '#92A1A7',
@@ -45,43 +44,45 @@ export default class FoodDetailView extends Component {
 
   render() {
     var tintColor = "#F08C37";
-    const tableData = [
-      [
-        <Icon name="fire" type='material-community' height={65} width={65} color={tintColor} />,
-        <Icon name="scale-bathroom" type='material-community' height={65} width={65} color={tintColor} />,
-        <Icon name="hexagon-multiple" type='material-community' height={65} width={65} color={tintColor} />,
-        <Icon name="water" type='material-community' height={65} width={65} color={tintColor} />
-      ],
-      ['Calories', 'Fat', 'Protein', 'Carbohydrate'],
-      [
-        this.state.data.nutrition.calories.factValue,
-        this.state.data.nutrition.fat.factValue,
-        this.state.data.nutrition.protein.factValue,
-        this.state.data.nutrition.carbohydrate.factValue
-      ],
-      [
-        this.state.data.nutrition.calories.factUnit,
-        this.state.data.nutrition.fat.factUnit,
-        this.state.data.nutrition.protein.factUnit,
-        this.state.data.nutrition.carbohydrate.factUnit
-      ]
-    ];
+    var tableData = []
+    if (this.state.data.nutrition)
+    {
+      tableData = [
+        [
+          <Icon name="fire" type='material-community' height={65} width={65} color={tintColor} />,
+          <Icon name="scale-bathroom" type='material-community' height={65} width={65} color={tintColor} />,
+          <Icon name="hexagon-multiple" type='material-community' height={65} width={65} color={tintColor} />,
+          <Icon name="water" type='material-community' height={65} width={65} color={tintColor} />
+        ],
+        ['Calories', 'Fat', 'Protein', 'Carbohydrate'],
+        [
+          this.state.data.nutrition.calories.factValue,
+          this.state.data.nutrition.fat.factValue,
+          this.state.data.nutrition.protein.factValue,
+          this.state.data.nutrition.carbohydrate.factValue
+        ],
+        [
+          this.state.data.nutrition.calories.factUnit,
+          this.state.data.nutrition.fat.factUnit,
+          this.state.data.nutrition.protein.factUnit,
+          this.state.data.nutrition.carbohydrate.factUnit
+        ]
+      ];
+    }
     return (
       <View style={styles.view}>
         <Image
           source={{ uri: this.state.data.imageUrl }}
-          style={{
-            height: 220,
-            width: 300,
-            alignSelf: 'center'
-          }}
-        />
+          style={ styles.foodImage } >
+        </Image>
+
         <Text style={{
           marginTop: 30,
           marginLeft: 15,
           fontSize: 16,
-          color: 'gray'
-        }}> Per 100g contains </Text>
+          color: 'gray' }}> 
+          Per 100g contains: 
+        </Text>
 
         <Table style={styles.table} borderStyle={{ borderWidth: 0, borderColor: '#fff' }}>
           <Cols data={tableData} flexArr={[1, 3, 1]} textStyle={styles.text} style={styles.row} />
@@ -92,6 +93,14 @@ export default class FoodDetailView extends Component {
 }
 
 var styles = StyleSheet.create({
+  foodImage: {
+    height: 280,
+    width: 280,
+    alignSelf: 'center',
+    borderRadius: 140,
+    borderColor: '#F08C37',
+    borderWidth: 3,
+  },
   view: {
     backgroundColor: '#FFF',
     flex: 1,
