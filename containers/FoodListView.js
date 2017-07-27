@@ -72,7 +72,7 @@ export default class FoodListView extends Component {
   fetchFoodList() {
     console.log('RUNNING API CALL');
 
-    var url = 'http://nutritiondoctor.azurewebsites.net/api/user/identify/jason';
+    var url = 'http://nutritiondoctor.azurewebsites.net/api/user/identify/james';
     const config = {
       method: 'GET',
       headers: {
@@ -97,7 +97,7 @@ export default class FoodListView extends Component {
   static navigationOptions = {
     header: [
       title =
-      <View
+      <TouchableHighlight
         style={{
           backgroundColor: "#FFF",
           borderBottomColor: '#ebe6e3',
@@ -116,7 +116,7 @@ export default class FoodListView extends Component {
           }} >
           Today, {new Date().toDateString()}
         </Text>
-      </View>,
+      </TouchableHighlight>,
     ],
   }
 

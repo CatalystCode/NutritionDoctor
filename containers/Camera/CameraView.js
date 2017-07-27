@@ -72,10 +72,10 @@ export default class CameraView extends Component {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ userId: "lilian", imageData: imageBase64 }),
+          body: JSON.stringify({ userId: "james", imageData: imageBase64 }),
         }
 
-        fetch("http://nutritiondoctorapi.azurewebsites.net/api/user/identify", config)
+        fetch("http://nutritiondoctor.azurewebsites.net/api/user/identify", config)
           .then((responseData) => {
             console.log(responseData);
             if (responseData.status == 200) {
