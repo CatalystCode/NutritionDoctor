@@ -17,8 +17,8 @@ export default class FoodDetailView extends Component {
       <View
         style={{
           backgroundColor: "#FFF",
-          borderBottomColor: '#92A1A7',
-          borderBottomWidth: 1,
+          borderBottomColor: '#ebe6e3',
+          borderBottomWidth: 15,
         }}
         key="foodDetail" >
         <Text
@@ -69,6 +69,7 @@ export default class FoodDetailView extends Component {
         ]
       ];
     }
+
     return (
       <View style={styles.view}>
         <Image
@@ -78,10 +79,10 @@ export default class FoodDetailView extends Component {
 
         <Text style={{
           marginTop: 30,
-          marginLeft: 15,
-          fontSize: 16,
+          marginLeft: 25,
+          fontSize: 14,
           color: 'gray' }}> 
-          Per 100g contains: 
+          Per 100g contains
         </Text>
 
         <Table style={styles.table} borderStyle={{ borderWidth: 0, borderColor: '#fff' }}>

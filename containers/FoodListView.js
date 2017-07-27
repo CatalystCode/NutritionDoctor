@@ -100,8 +100,8 @@ export default class FoodListView extends Component {
       <View
         style={{
           backgroundColor: "#FFF",
-          borderBottomColor: '#92A1A7',
-          borderBottomWidth: 1,
+          borderBottomColor: '#ebe6e3',
+          borderBottomWidth: 15,
         }}
         key="foodlistDate"
         onPress={this._selectDate}
