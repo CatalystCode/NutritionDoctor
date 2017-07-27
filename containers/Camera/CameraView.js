@@ -7,14 +7,31 @@ import {
   TouchableOpacity,
   View,
   NativeModules,
-  Alert
+  Alert,
+  Text
 } from 'react-native';
 import Camera from 'react-native-camera';
+import { Icon } from 'react-native-elements';
 
 export default class CameraView extends Component {
   static navigationOptions = {
     header: [
-      visible = false,
+      title =
+      <View
+       style={{backgroundColor: "#F08C37"}}
+        key="foodDetail"
+      >
+        <Text
+          style={{
+            color: "#FFF",
+            textAlign: 'center',
+            fontSize: 20,
+            marginBottom: 10,
+            marginTop: 10
+          }} >
+          Nutrition Doctor
+        </Text>
+       </View> 
     ]
   }
 
@@ -38,11 +55,7 @@ export default class CameraView extends Component {
     if (this.camera) {
       this.camera.capture()
         .then((data) => {
-          //Commented out 'onPictureCapture' because it wasn't working. @Jason, what is it?
-          // if (this.props.onPictureCapture) {
-          //this.props.onPictureCapture(data.path);
           this.storePicture(data.path);
-          // }
         })
         .catch(err => console.error(err));
     }
@@ -76,7 +89,7 @@ export default class CameraView extends Component {
               )
 
               this.props.navigation.navigate('FoodList');
-            }else{
+            } else {
               Alert.alert(
                 'Woops!',
                 'Sorry, something went wrong.',
@@ -155,10 +168,24 @@ export default class CameraView extends Component {
             <Image source={this.flashIcon} />
           </TouchableOpacity>
         </View>
+
         <View style={[styles.overlay, styles.bottomOverlay]}>
-          <TouchableOpacity style={styles.captureButton} onPress={this.takePicture} >
-            <Image source={require('./assets/ic_photo_camera_36pt.png')} />
-          </TouchableOpacity>
+          <View>
+            <TouchableOpacity style={styles.menuButton} >
+              <Icon name="image-area" type='material-community' color={'#000'} />
+            </TouchableOpacity>
+          </View>
+          <View>
+            <TouchableOpacity style={styles.captureButton} onPress={this.takePicture} >
+               <Icon name="camera" type='material-community' width={60} height={60} color={'#FFF'} /> 
+              {/* <Image source={require('./assets/photo-camera.png')} /> */}
+            </TouchableOpacity>
+          </View>
+          <View>
+            <TouchableOpacity style={styles.menuButton} onPress={() => this.props.navigation.navigate('FoodList')} >
+              <Icon name="clock" type='material-community' color={'#000'} />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     );
@@ -196,8 +223,17 @@ const styles = StyleSheet.create({
   },
   captureButton: {
     padding: 15,
+    backgroundColor: '#F08C37',
+    borderRadius: 60,
+    marginRight: 20,
+    marginLeft: 20
+  },
+  menuButton: {
+    padding: 15,
     backgroundColor: 'white',
     borderRadius: 40,
+    marginRight: 20,
+    marginLeft: 20
   },
   flashButton: {
     padding: 10,

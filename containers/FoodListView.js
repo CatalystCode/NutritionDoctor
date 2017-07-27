@@ -18,8 +18,6 @@ const value = null;
 const datePickerProps = null;
 
 export default class FoodListView extends Component {
-
-
   constructor(props) {
     super(props);
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
@@ -74,7 +72,7 @@ export default class FoodListView extends Component {
   fetchFoodList() {
     console.log('RUNNING API CALL');
 
-    var url = 'http://nutritiondoctorapi.azurewebsites.net/api/user/identify/lilian';
+    var url = 'http://nutritiondoctorapi.azurewebsites.net/api/user/identify/jason';
     const config = {
       method: 'GET',
       headers: {
@@ -99,16 +97,18 @@ export default class FoodListView extends Component {
   static navigationOptions = {
     header: [
       title =
-      <TouchableHighlight
-       style={{
-            backgroundColor: "#F08C37",
-          }}
+      <View
+        style={{
+          backgroundColor: "#FFF",
+          borderBottomColor: '#92A1A7',
+          borderBottomWidth: 1,
+        }}
         key="foodlistDate"
         onPress={this._selectDate}
       >
         <Text
           style={{
-            color: "#FFF",
+            color: "#92A1A7",
             textAlign: 'center',
             fontSize: 20,
             marginBottom: 10,
@@ -116,8 +116,9 @@ export default class FoodListView extends Component {
           }} >
           Today, {new Date().toDateString()}
         </Text>
-      </TouchableHighlight>
-    ]
+      </View>,
+    ],
+    headerLeft: <Button color="#92A1A7" title="<" />
   }
 
   renderRow(rowData) {
@@ -133,15 +134,14 @@ export default class FoodListView extends Component {
           padding: 20,
           alignItems: 'center',
           borderColor: '#D7D7D7',
-          borderBottomWidth: 1,
+          borderBottomWidth: 0.5,
           backgroundColor: '#fff'
         }}>
           <Image
             source={{ uri: rowData.imageUrl }}
             style={{
-              height: 50,
-              width: 50,
-              borderRadius: 25
+              height: 70,
+              width: 100,
             }}
           />
 
@@ -149,14 +149,20 @@ export default class FoodListView extends Component {
             paddingLeft: 20
           }}>
             <Text style={{
-            fontWeight: '800',
-            color: '#F08C37'
-          }}>
+              fontSize: 18,
+              fontWeight: '400',
+              color: '#F08C37'
+            }}>
               {rowData.foodName}
             </Text>
 
-            <Text>
-              {rowData.nutrition.calories.factValue} {rowData.nutrition.calories.factUnit}
+            <Text style={{ color: '#92A1A7', marginTop: 10 }}>
+              {rowData.nutrition.calories.factValue} {rowData.nutrition.calories.factUnit} / 100g
+            </Text>
+
+            <Text style={{ color: '#92A1A7', marginTop: 10 }}>
+              {/* Update this with time of creation from db */}
+              {new Date().toDateString()}
             </Text>
           </View>
         </View>
@@ -181,8 +187,8 @@ export default class FoodListView extends Component {
 
     return (
       <PTRView onRefresh={this._refresh} style={{
-          backgroundColor: '#FFF',
-        }}>
+        backgroundColor: '#FFF',
+      }}>
         <View style={{
           flex: 1,
           justifyContent: 'flex-start',
