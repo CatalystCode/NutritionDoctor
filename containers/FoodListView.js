@@ -72,7 +72,7 @@ export default class FoodListView extends Component {
   fetchFoodList() {
     console.log('RUNNING API CALL');
 
-    var url = 'http://nutritiondoctor.azurewebsites.net/api/user/identify/james';
+    var url = 'http://nutritiondoctor.azurewebsites.net/api/user/identify/jason';
     const config = {
       method: 'GET',
       headers: {

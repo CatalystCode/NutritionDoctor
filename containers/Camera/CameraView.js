@@ -45,7 +45,7 @@ export default class CameraView extends Component {
         aspect: Camera.constants.Aspect.fill,
         captureTarget: Camera.constants.CaptureTarget.cameraRoll,
         type: Camera.constants.Type.back,
-        orientation: Camera.constants.Orientation.auto,
+        orientation: Camera.constants.Orientation.portrait,
         flashMode: Camera.constants.FlashMode.auto,
       }
     };
@@ -72,7 +72,7 @@ export default class CameraView extends Component {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ userId: "james", imageData: imageBase64 }),
+          body: JSON.stringify({ userId: "jason", imageData: imageBase64 }),
         }
 
         fetch("http://nutritiondoctor.azurewebsites.net/api/user/identify", config)
