@@ -1,53 +1,23 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  StyleSheet,
-  Text,
-  View
+  StyleSheet
 } from 'react-native';
+import { StackNavigator, TabNavigator } from 'react-navigation';
+import { Icon } from 'react-native-elements';
 
-export default class NutritionDoctor extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
-    );
-  }
-}
+import FoodListView from './containers/FoodListView';
+import FoodDetailView from './containers/FoodDetailView';
+import CameraView from './containers/Camera/CameraView';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+const App = StackNavigator(
+  {
+    Camera: { screen: CameraView },
+    FoodList: { screen: FoodListView },
+    Nutrition: { screen: FoodDetailView },
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+  {
+    headerMode: 'screen'
+  });
 
-AppRegistry.registerComponent('NutritionDoctor', () => NutritionDoctor);
+AppRegistry.registerComponent('NutritionDoctor', () => App);

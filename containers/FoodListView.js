@@ -8,26 +8,90 @@ import {
   ActivityIndicator,
   Image,
   TouchableHighlight,
-  Button
 } from 'react-native';
 import PTRView from 'react-native-pull-to-refresh';
 import FoodDetailView from './FoodDetailView.js';
 import Moment from 'moment';
 
-const value = null;
-const datePickerProps = null;
+const styles = StyleSheet.create({
+  headerTouchable:
+  {
+    backgroundColor: '#FFF',
+    borderBottomColor: '#ebe6e3',
+    borderBottomWidth: 15
+  },
+  headerText:
+  {
+    color: '#92A1A7',
+    textAlign: 'center',
+    fontSize: 20,
+    marginBottom: 10,
+    marginTop: 10
+  },
+  rowDataView:
+  {
+    flex: 1,
+    flexDirection: 'row',
+    padding: 20,
+    alignItems: 'center',
+    borderColor: '#D7D7D7',
+    borderBottomWidth: 0.5,
+    backgroundColor: '#FFF'
+  },
+  rowDataText:
+  {
+    fontSize: 18,
+    fontWeight: '400',
+    color: '#F08C37'
+  },
+  rowDataTextSubtitle:
+  {
+    color: '#92A1A7',
+    marginTop: 10
+  },
+  viewIndicator: 
+  {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#FFF',
+  },
+  viewList:
+  {
+    flex: 1,
+    justifyContent: 'flex-start',
+    backgroundColor: '#FFF',
+  },
+  imageStyle:
+  {
+    height: 70,
+    width: 100,
+  }
+});
 
 export default class FoodListView extends Component {
+  static navigationOptions = {
+    header: [
+      title =
+      <TouchableHighlight
+        style={styles.headerTouchable}
+        key="foodlistView"
+        onPress={this._selectDate} >
+        <Text style={styles.headerText} >
+          Today, {new Date().toDateString()}
+        </Text>
+      </TouchableHighlight>
+    ]
+  }
+
   constructor(props) {
     super(props);
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     this.state = {
       dataSource: ds,
-      showProgress: true,
-      selectedDay: null
+      showProgress: true
     };
 
-    this._refresh = this._refresh.bind(this)
+    this._refresh = this._refresh.bind(this);
   }
 
   componentDidMount() {
@@ -43,35 +107,11 @@ export default class FoodListView extends Component {
     });
   }
 
-  handleDayChange = selectedDay => {
-    this.setState({ selectedDay });
-  };
-
   _selectDate() {
-    console.log("I AM HERE");
-    const value = this.state.selectedDay
-      ? this.state.selectedDay.format('DD/MM/YYYY')
-      : '';
-
-    // return (
-    //   // <form>
-    //   //   <p>
-    //   //     <label for="input">Please enter a day:</label>
-    //   //   </p>
-    //   //   <DayPickerInput
-    //   //     name="birthday"
-    //   //     placeholder="DD/MM/YYYY"
-    //   //     format="DD/MM/YYYY"
-    //   //     value={value}
-    //   //     onDayChange={this.handleDayChange}
-    //   //   />
-    //   // </form>
-    // )
+    /* TODO: Implement calendar date selection */
   }
 
   fetchFoodList() {
-    console.log('RUNNING API CALL');
-
     var url = 'http://nutritiondoctor.azurewebsites.net/api/user/identify/jason';
     const config = {
       method: 'GET',
@@ -79,7 +119,7 @@ export default class FoodListView extends Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       }
-    }
+    };
 
     fetch(url, config)
       .then((response) => response.json())
@@ -89,95 +129,43 @@ export default class FoodListView extends Component {
             .cloneWithRows(responseData),
           showProgress: false
         });
-        console.log(responseData);
-      })
-  }
-
-
-  static navigationOptions = {
-    header: [
-      title =
-      <TouchableHighlight
-        style={{
-          backgroundColor: "#FFF",
-          borderBottomColor: '#ebe6e3',
-          borderBottomWidth: 15,
-        }}
-        key="foodlistDate"
-        onPress={this._selectDate}
-      >
-        <Text
-          style={{
-            color: "#92A1A7",
-            textAlign: 'center',
-            fontSize: 20,
-            marginBottom: 10,
-            marginTop: 10
-          }} >
-          Today, {new Date().toDateString()}
-        </Text>
-      </TouchableHighlight>,
-    ],
+      });
   }
 
   renderRow(rowData) {
-    const formattedDate = Moment(rowData.createdDateTime).format('LL')
+    const formattedDate = Moment(rowData.createdDateTime).format('LL');
     if (rowData) {
       return (
         <TouchableHighlight
           onPress={() => this.props.navigation.navigate('Nutrition', { data: rowData })}
           underlayColor='#ddd'
           key={rowData.userId} >
-          <View style={{
-            flex: 1,
-            flexDirection: 'row',
-            padding: 20,
-            alignItems: 'center',
-            borderColor: '#D7D7D7',
-            borderBottomWidth: 0.5,
-            backgroundColor: '#fff'
-          }}>
+          <View style={styles.rowDataView}>
             <Image
               source={{ uri: rowData.imageUrl }}
-              style={{
-                height: 70,
-                width: 100,
-              }}
+              style={styles.imageStyle}
             />
-
             <View style={{ paddingLeft: 20 }}>
-              <Text style={{
-                fontSize: 18,
-                fontWeight: '400',
-                color: '#F08C37'
-              }}>
+              <Text style={styles.rowDataText}>
                 {rowData.foodName}
               </Text>
-
-              {rowData.nutrition.calories && 
-                <Text style={{ color: '#92A1A7', marginTop: 10 }}>
-                  {rowData.nutrition.calories.factValue} {rowData.nutrition.calories.factUnit} / 100g
-                </Text>
-              }
-
-              <Text style={{ color: '#92A1A7', marginTop: 10 }}>
-                { formattedDate }
+              <Text style={styles.rowDataTextSubtitle}>
+                {rowData.nutrition.calories.factValue} {rowData.nutrition.calories.factUnit} / 100g
+              </Text>
+              <Text style={styles.rowDataTextSubtitle}>
+                {formattedDate}
               </Text>
             </View>
           </View>
         </TouchableHighlight>
       );
-    }
+    };
   }
 
   render() {
     if (this.state.showProgress) {
       return (
-        <View style={{
-          flex: 1,
-          justifyContent: 'center',
-          backgroundColor: '#FFF',
-        }}>
+        <View style={styles.viewIndicator}>
           <ActivityIndicator
             size="large"
             animating={true} />
@@ -186,14 +174,8 @@ export default class FoodListView extends Component {
     }
 
     return (
-      <PTRView onRefresh={this._refresh} style={{
-        backgroundColor: '#FFF',
-      }}>
-        <View style={{
-          flex: 1,
-          justifyContent: 'flex-start',
-          backgroundColor: '#FFF',
-        }}>
+      <PTRView onRefresh={this._refresh} style={{ backgroundColor: '#FFF' }}>
+        <View style={styles.viewList}>
           <ListView
             dataSource={this.state.dataSource}
             renderRow={this.renderRow.bind(this)} />

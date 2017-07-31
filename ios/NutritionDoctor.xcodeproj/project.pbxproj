@@ -1210,6 +1210,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.liliankasem.NutritionDoctor;
 				PRODUCT_NAME = NutritionDoctor;
+				SDKROOT = iphoneos10.3;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1227,7 +1228,7 @@
 				);
 				INFOPLIST_FILE = NutritionDoctor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1235,6 +1236,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.liliankasem.NutritionDoctor;
 				PRODUCT_NAME = NutritionDoctor;
+				SDKROOT = iphoneos10.3;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
