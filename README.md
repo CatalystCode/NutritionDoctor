@@ -25,5 +25,5 @@ The Mobile Client is a react-native application that communicates with a REST AP
 2. `npm install -g react-native-cli`
 3. `git clone git@github.com:CatalystCode/NutritionDoctor.git`
 4. `cd NutritionDoctor`
-5. `npm install`
+5. `yarn install`
 6. `react-native run-ios`
